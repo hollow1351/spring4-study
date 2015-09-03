@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="methodReplacer" class="ch3.mi.FormatMessageReplacer"/>
+    
+    <bean id="noCheckMethodReplacer" class="ch3.mi.NoCheckFormatMessageReplacer"/>
+    
+    <bean id="replacementTarget" class="ch3.mi.ReplacementTarget">
+        <replaced-method name="formatMessage" replacer="methodReplacer">
+            <arg-type match="String"/>
+        </replaced-method>
+    </bean>
+    
+    <bean id="noCheckReplacementTarget" class="ch3.mi.ReplacementTarget">
+        <replaced-method name="formatMessage" replacer="noCheckMethodReplacer">
+            <arg-type match="String"/>
+        </replaced-method>
+    </bean>
+    
+    <bean id="standardTarget" class="ch3.mi.ReplacementTarget"/>
+</beans>
