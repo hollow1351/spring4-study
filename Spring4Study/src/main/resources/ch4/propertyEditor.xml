@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd">
+    <bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer" 
+          p:propertyEditorRegistrars-ref="propertyEditorRegistrars" p:customEditors-ref="customEditors"/>
+    <util:list id="propertyEditorRegistrars">
+        <bean class="ch4.PropertyEditorBean$CustomPropertyEditorRegistrar"/>
+    </util:list>
+    <util:map id="customEditors">
+        <entry key="ch4.PropertyEditorBean$MyWrapper" value="ch4.PropertyEditorBean"/>
+    </util:map>
+    <bean id="builtInSample" class="ch4.PropertyEditorBean"
+          p:bytes="Hello World"
+          p:cls="java.lang.String"
+          p:bool="true"
+          p:list-ref="list"
+          p:floatVal="123.456"
+          p:date="2015.09.01"
+          p:file="test.txt"
+          p:stream="file:test.txt"
+          p:locale="en_US"
+          p:pattern="a*b"
+          p:properties="prop1=val1 prop2=val2"
+          p:trimString="    Some string     "
+          p:url="http://www.springframework.org"
+          p:myWrapper="to wrap"/>
+    <util:list id="list">
+        <value>value1</value>
+        <value>value2</value>
+    </util:list>
+</beans>
